@@ -12,7 +12,7 @@ class TrackList extends React.Component {
           })
         }
       </div>
-    )
+    );
   }
 }
 
