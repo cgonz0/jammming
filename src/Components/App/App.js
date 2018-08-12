@@ -9,6 +9,8 @@ class App extends Component {
 
   constructor(props) {
     super(props);
+    this.addTrack = this.addTrack.bind(this);
+    this.removeTrack = this.removeTrack.bind(this);
     this.state = {
       searchResults: [
         {
@@ -33,6 +35,31 @@ class App extends Component {
     }
   }
 
+  // removeTrack(track) {
+  //   if (this.state.playListTracks.find(savedTrack => savedTrack.id === track.id)) {
+  //     return;
+  //   } else {
+  //     this.state.playListTracks.pop();
+  //   }
+  //   let newPlayListTracks = this.state.playlistTracks;
+  //   this.setState({playlistTracks: newPlayListTracks});
+  // }
+
+  removeTrack (track) {
+    let newPlayListTracks = this.state.playListTracks.filter(savedTrack => savedTrack.id !== track.id);
+    this.setState({playListTracks: newPlayListTracks});
+  }
+
+  addTrack(track) {
+    if (this.state.playListTracks.find(savedTrack => savedTrack.id === track.id)) {
+      return;
+    } else {
+      this.state.playListTracks.push(track);
+    }
+    let newPlayListTracks = this.state.playListTracks;
+    this.setState({playListTracks: newPlayListTracks});
+  };
+
   render() {
     return (
       <div>
@@ -40,8 +67,8 @@ class App extends Component {
         <div className="App">
           <SearchBar />
           <div className="App-playlist">
-            <SearchResults searchResults={this.state.searchResults}/>
-            <PlayList playListName={this.state.playListName} playListTracks={this.state.playListTracks}/>
+            <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
+            <PlayList playListName={this.state.playListName} playListTracks={this.state.playListTracks} onRemove={this.removeTrack}/>
           </div>
         </div>
       </div>

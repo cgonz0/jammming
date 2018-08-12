@@ -58,10 +58,14 @@ h2 {
 .App {
   height: 100%;
   padding: 0 17% 10% 17%;
-  background-image: url('./background_photo_desktop.jpg');
+  /* background-image: url('./background_photo_desktop.jpg');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
+  background: #311081; /* Old browsers */
+  background: -moz-linear-gradient(45deg, #311081 0%, #6f2c8b 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(45deg, #311081 0%,#6f2c8b 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(45deg, #311081 0%,#6f2c8b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   font-family: 'Work Sans', sans-serif;
   font-weight: 500;
   color: #fff;
