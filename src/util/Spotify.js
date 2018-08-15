@@ -22,7 +22,36 @@ const Spotify = {
     } else {
       window.location.replace(`https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectURI}`);
     }
-  }
+  },
+
+  search(searchTerm) {
+    fetch(`https://api.spotify.com/v1/search?type=track&q=${seachTerm}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      },
+    }).then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error('Request Failed!');
+    }, networkError => {
+        console.log(networkError.message);
+    }).then(jsonResponse => {
+      if (jsonResponse.tracks.item) {
+        return jsonResponse.tracks.items.map(track => ({
+          id: track.id,
+          name: track.name,
+          artist: track.artists[0].name,
+          album: track.album.name,
+          uri: track.uri
+        }));
+      } else {
+        return [];
+      }
+    })
+  },
+
+
 }
 
 
