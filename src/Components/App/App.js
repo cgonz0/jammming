@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
@@ -17,26 +16,26 @@ class App extends Component {
     this.search = this.search.bind(this);
     this.state = {
       searchResults: [
-        {
-          name: 'Honey',
-          artist: "Kehlani",
-          album: 'SSS',
-          id: '1'
-        }
+        // {
+        //   name: 'Honey',
+        //   artist: "Kehlani",
+        //   album: 'SSS',
+        //   id: '1'
+        // }
       ],
 
-      playListName: 'Jams',
+      playListName: '',
 
       playListTracks: [
-        {
-          name: 'Honey',
-          artist: 'Kehlani',
-          album: 'SSS',
-          id: '2'
-        }
+        // {
+        //   name: 'Honey',
+        //   artist: 'Kehlani',
+        //   album: 'SSS',
+        //   id: '2'
+        // }
       ]
 
-    }
+    };
   }
 
   // removeTrack(track) {
@@ -70,11 +69,16 @@ class App extends Component {
 
   savePlayList(){
     let trackURIs = this.state.playListTracks.map(track => track.uri);
+    Spotify.savePlayList(this.state.playListName, trackURIs);
+    this.setState({
+      playlistName: 'New Playlist',
+      playlistTracks: []
+    })
   };
 
   search(searchTerm) {
-    Spotify.search(searchTerm).then(searchResults => {
-      this.setState({ searchResults: searchResults });
+    Spotify.search(searchTerm).then(results => {
+      this.setState({ searchResults: results });
     });
   }
 
@@ -85,7 +89,7 @@ class App extends Component {
         <div className="App">
           <SearchBar
             onSearch={this.search}
-            onTermChange={this.search}
+            // onTermChange={this.search}
           />
           <div className="App-playlist">
             <SearchResults

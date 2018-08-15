@@ -1,4 +1,5 @@
 let accessToken;
+let expiresIn;
 const redirectURI = 'http://localhost:3000/';
 const clientID = '08d71502090b47049162490f1d678ee7';
 
@@ -25,7 +26,7 @@ const Spotify = {
   },
 
   search(searchTerm) {
-    fetch(`https://api.spotify.com/v1/search?type=track&q=${seachTerm}`, {
+    fetch(`https://api.spotify.com/v1/search?type=track&q=${searchTerm}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`
       },
@@ -51,6 +52,63 @@ const Spotify = {
     })
   },
 
+  savePlayList(playListName, trackURIs) {
+
+    let accessToken = Spotify.getAccessToken();
+    const headers = {
+      Authorization: `Bearer ${accessToken}`
+    }
+    // let userID;
+    // let playListID;
+
+    if (playListName && trackURIs) {
+      return;
+    }
+    // Make a request to retrieve user ID
+    return fetch('https://api.spotify.com/v1/me', {
+      headers: headers
+   // Convert the response to json
+    }).then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+    // Set the userID to the returned Id
+    }).then(jsonResponse => {
+      let userID = jsonResponse.id;
+
+      // Use returned userID to create the playlist on Spotify
+      return fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify({name: playListName})
+        // convert the response to json
+      }).then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        throw new Error('Request failed!');
+      }, networkError => {
+        console.log(networkError);
+      // Set playListID to the returned playList ID
+      }).then(jsonResponse => {
+        let playListID = jsonResponse.id;
+        const uriData = JSON.stringify({uris: trackURIs});
+
+        // Add tracks to the playlist
+        return fetch(`https://api.spotify.com/v1/users/${userID}/playlists/${playListID}/tracks`, {
+          headers: headers,
+          method: 'POST',
+          body: uriData
+        }).then(response => {
+          if (response.ok) {
+            return response.json();
+          }
+        })
+      })
+    })
+
+
+  }
 
 }
 
