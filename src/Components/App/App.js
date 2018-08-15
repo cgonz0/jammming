@@ -4,6 +4,7 @@ import './App.css';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import PlayList from '../PlayList/PlayList';
+import Spotify from '../../util/Spotify';
 
 class App extends Component {
 
@@ -71,10 +72,11 @@ class App extends Component {
     let trackURIs = this.state.playListTracks.map(track => track.uri);
   };
 
-  search(search) {
-    console.log(search);
+  search(searchTerm) {
+    Spotify.search(searchTerm).then(searchResults => {
+      this.setState({ searchResults: searchResults });
+    });
   }
-
 
   render() {
     return (
