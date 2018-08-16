@@ -1,6 +1,6 @@
 let accessToken;
 let expiresIn;
-const redirectURI = 'http://localhost:3000/';
+const redirectURI = 'http://jammmies.surge.sh';
 const clientID = '08d71502090b47049162490f1d678ee7';
 
 const Spotify = {
@@ -26,6 +26,7 @@ const Spotify = {
   },
 
   search(searchTerm) {
+    const accessToken = Spotify.getAccessToken();
     fetch(`https://api.spotify.com/v1/search?type=track&q=${searchTerm}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`
@@ -54,7 +55,7 @@ const Spotify = {
 
   savePlayList(playListName, trackURIs) {
 
-    let accessToken = Spotify.getAccessToken();
+    const accessToken = Spotify.getAccessToken();
     const headers = {
       Authorization: `Bearer ${accessToken}`
     }
