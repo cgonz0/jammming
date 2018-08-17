@@ -1,7 +1,7 @@
 let accessToken;
 let expiresIn;
-const redirectURI = 'http://jammmies.surge.sh';
-// const redirectURI = 'http://localhost:3000/';
+// const redirectURI = 'http://jammmies.surge.sh';
+const redirectURI = 'http://localhost:3000/';
 const clientID = '08d71502090b47049162490f1d678ee7';
 
 const Spotify = {
@@ -60,10 +60,8 @@ const Spotify = {
     const headers = {
       Authorization: `Bearer ${accessToken}`
     }
-    // let userID;
-    // let playListID;
 
-    if (playListName && trackURIs) {
+    if (!playListName && !trackURIs.length) {
       return;
     }
     // Make a request to retrieve user ID
