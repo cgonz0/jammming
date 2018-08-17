@@ -36,9 +36,6 @@ const Spotify = {
       if (response.ok) {
         return response.json();
       }
-      throw new Error('Request Failed!');
-    }, networkError => {
-        console.log(networkError.message);
     }).then(jsonResponse => {
       if (jsonResponse.tracks) {
         return jsonResponse.tracks.items.map(track => ({
@@ -86,23 +83,15 @@ const Spotify = {
         if (response.ok) {
           return response.json()
         }
-        throw new Error('Request failed!');
-      }, networkError => {
-        console.log(networkError);
       // Set playListID to the returned playList ID
       }).then(jsonResponse => {
         let playListID = jsonResponse.id;
-        const uriData = JSON.stringify({uris: trackURIs});
 
         // Add tracks to the playlist
         return fetch(`https://api.spotify.com/v1/users/${userID}/playlists/${playListID}/tracks`, {
           headers: headers,
           method: 'POST',
-          body: uriData
-        }).then(response => {
-          if (response.ok) {
-            return response.json();
-          }
+          body: JSON.stringify({uris: trackURIs})
         })
       })
     })
