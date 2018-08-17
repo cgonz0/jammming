@@ -1,6 +1,7 @@
 let accessToken;
 let expiresIn;
 const redirectURI = 'http://jammmies.surge.sh';
+// const redirectURI = 'http://localhost:3000/';
 const clientID = '***REMOVED***';
 
 const Spotify = {
@@ -39,7 +40,7 @@ const Spotify = {
     }, networkError => {
         console.log(networkError.message);
     }).then(jsonResponse => {
-      if (jsonResponse.tracks.item) {
+      if (jsonResponse.tracks) {
         return jsonResponse.tracks.items.map(track => ({
           id: track.id,
           name: track.name,

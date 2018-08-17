@@ -4,15 +4,21 @@ import './PlayList.css'
 
 class PlayList extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handlePlayListSave = this.handlePlayListSave.bind(this);
+  }
+
   handleNameChange(e) {
     const name = e.target.value;
     this.props.onNameChange(name);
   }
 
-  constructor(props) {
-    super(props);
-    this.handleNameChange = this.handleNameChange.bind(this);
+  handlePlayListSave() {
+    this.props.onSave();
   }
+
 
   render() {
     return (
@@ -26,7 +32,7 @@ class PlayList extends React.Component {
           onRemove={this.props.onRemove}
           isRemoval={true}
         />
-        <a className="Playlist-save" onClick={this.props.onSave}>SAVE TO SPOTIFY</a>
+        <a className="Playlist-save" onClick={this.handlePlayListSave}>SAVE TO SPOTIFY</a>
       </div>
     );
   }
