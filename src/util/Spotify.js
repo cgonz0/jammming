@@ -26,6 +26,26 @@ const Spotify = {
     }
   },
 
+  // getUserID(userID) {
+  //   const accessToken = Spotify.getAccessToken();
+  //   const headers = {
+  //     Authorization: `Bearer ${accessToken}`
+  //   }
+
+  //   return fetch('https://api.spotify.com/v1/me', {
+  //     method: 'GET',
+  //     headers: headers,
+  //     body: JSON.stringify({id: userID})
+  //   }).then(response => {
+  //     if (response.ok) {
+  //       return response.json()
+  //     }
+  //   // Set playListID to the returned playList ID
+  //   }).then(jsonResponse => {
+  //     let userID = jsonResponse.id;
+  //   })
+  // },
+
   search(searchTerm) {
     const accessToken = Spotify.getAccessToken();
     return fetch(`https://api.spotify.com/v1/search?type=track&q=${searchTerm}`, {
@@ -43,6 +63,7 @@ const Spotify = {
           name: track.name,
           artist: track.artists[0].name,
           album: track.album.name,
+          image: track.album.images[0].url,
           uri: track.uri
         }));
       } else {

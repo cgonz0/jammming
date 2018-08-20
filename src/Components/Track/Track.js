@@ -28,13 +28,17 @@ class Track extends React.Component {
     return(
       <div className="Track">
         <div className="Track-information">
-          <h3>{this.props.track.name}</h3>
-          <p>{this.props.track.artist} | {this.props.track.album}</p>
+          <div className="Track-image-wrapper">
+            <img src={this.props.track.image} />
+          </div>
+          <div className="Track-info-wrapper">
+            <h3>{this.props.track.name}</h3>
+            <p>{this.props.track.artist} | {this.props.track.album}</p>
+          </div>
         </div>
         {this.renderAction()}
       </div>
     );
   }
 }
-
 export default Track;
