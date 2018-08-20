@@ -59,11 +59,18 @@ class App extends Component {
     });
   }
 
+  // getUserID(userID) {
+  //   Spotify.getUserID(userID).then(id => {
+  //     this.setState({ userID: id });
+  //   });
+  // }
+
   render() {
     return (
       <div>
         <h1>Ja<span className="highlight">mmm</span>ing</h1>
         <div className="App">
+          {/* <div className="userID">Welcome{this.getUserID.name}</div> */}
           <SearchBar
             onSearch={this.search}
             // onTermChange={this.search}
