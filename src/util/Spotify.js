@@ -2,7 +2,7 @@ let accessToken;
 let expiresIn;
 // const redirectURI = 'http://jammmies.surge.sh';
 const redirectURI = 'http://localhost:3000/';
-const clientID = '***REMOVED***';
+const clientID = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 
 const Spotify = {
   getAccessToken() {
