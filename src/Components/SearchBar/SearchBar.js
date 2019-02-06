@@ -18,7 +18,9 @@ class SearchBar extends React.Component {
   }
 
   handleTermChange(event){
-    this.setState({search: event.target.value});
+    const search = event.target.value;
+    sessionStorage.setItem('search', search); // store the current search term to local storage
+    this.setState({search: search});
   }
 
   handleEnterKeyPress = event => {
@@ -28,10 +30,17 @@ class SearchBar extends React.Component {
     }
   }
 
+  componentWillMount() { // set the previous search term in the state, if it exists in sessionStorage
+    let search = sessionStorage.getItem('search');
+    if (search) {
+        this.setState({ search: search })
+    }
+  }
+
   render() {
     return(
       <div className="SearchBar">
-        <input onKeyPress={this.handleEnterKeyPress} onChange={this.handleTermChange} placeholder="Enter A Song, Album, or Artist" />
+        <input onKeyPress={this.handleEnterKeyPress} onChange={this.handleTermChange} value={this.state.search} placeholder="Enter A Song, Album, or Artist" />
         <a onClick={this.search}>SEARCH</a>
       </div>
     );
