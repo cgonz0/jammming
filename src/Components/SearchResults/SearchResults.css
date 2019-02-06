@@ -2,10 +2,19 @@
   width: 50%;
   height: 950px;
   overflow-y: scroll;
-  padding: .88rem;
+  padding: 1rem;
   background-color: rgba(1, 12, 63, 0.7);
   /* box-shadow: 0 4px 2px 2px #000000; */
   box-shadow: 1px 1px 3px 1px #130535;
+  text-align: left;
+}
+
+h2.Results {
+  margin-bottom: 15px;
+  margin-top: -3px;
+  font-size: 18px;
+  font-weight: 100;
+  font-style: italic;
 }
 
 ::-webkit-scrollbar {
